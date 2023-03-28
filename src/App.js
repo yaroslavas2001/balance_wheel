@@ -40,16 +40,43 @@ export const options = {
   responsive: true,
   scales: {
     r: {
+      angleLines: {
+        display: true,
+        color: "#000"
+      },
+
+      border: {
+        display: true,
+        color: "red",
+        width: 4,
+        z: 2,
+        // dash:[3,2,5,6],
+      },
+      ticks: {
+        font: {
+          size: 19
+        }
+        // backdropColor:'red'
+      },
+      grid: {
+        circular: true,
+        color: "#000",
+        borderColor: 'red',
+        borderWidth: 4,
+        lineWidth: 1,
+      },
       pointLabels: {
         display: true,
         centerPointLabels: true,
         font: {
           size: 18
         }
-      }
-    }
+      },
+
+
+
+    },
   },
-  
 }
 
 export default function App() {
