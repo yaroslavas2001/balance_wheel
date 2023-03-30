@@ -1,6 +1,7 @@
 import React, { FC, ReactElement } from "react";
 import { useState, } from "react";
 import { PolarAreaDataModel } from "../../Model/PolarAreaDataModel";
+import Button from "../Button/Button";
 
 
 type propsType = {
@@ -20,6 +21,7 @@ const PieChartItem: FC<propsType> = ({ editItem, item,
     let [backgroundColor, setBackgroundColor] = useState<string>(item.backgroundColor)
     let backgroundColorInput = backgroundColor.replace(', 0.75)', ')').replace('rgba', 'rgb')
     let save = () => {
+        // item.backgroundColor = item.backgroundColor.replace(')', ', 0.75)').replace('rgb', 'rgba')
         let item: PolarAreaDataModel = {
             label: label,
             value: value,
@@ -42,33 +44,23 @@ const PieChartItem: FC<propsType> = ({ editItem, item,
             {editItem === item.id ? <>
                 <td><input type="text" value={label} onChange={setItemLabel} /></td>
                 <td><input type="number" value={value} onChange={setItemValue} /></td>
-               
                 <td>
-                     {backgroundColorInput}
                     <input type="color" value={backgroundColorInput} onChange={setItemBackgroundColor} /></td>
                 <td>
-                    <button onClick={save}>
-                        Save
-                    </button>
+                    <Button name="Save" onClick={save} />
                 </td>
                 <td >
-                    <button onClick={canselItem}>
-                        Cansel
-                    </button>
+                    <Button name="Cansel" onClick={canselItem} />
                 </td>
             </> : <>
                 <td>{item.label}</td>
                 <td>{item.value}</td>
                 <td style={{ backgroundColor: item.backgroundColor }} />
                 <td>
-                    <button onClick={() => setIdEditMode(item.id)}>
-                        Edit
-                    </button>
+                    <Button name="Edit" onClick={() => setIdEditMode(item.id)} />
                 </td>
-                <td >
-                    <button onClick={() => deleteItem(item.id)}>
-                        Delete
-                    </button>
+                <td>
+                    <Button name="Delete" onClick={() => deleteItem(item.id)} />
                 </td>
             </>}
         </tr >)
