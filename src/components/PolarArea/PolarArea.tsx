@@ -10,6 +10,7 @@ import {
 import { PolarArea } from 'react-chartjs-2';
 import style from "./PolarArea.module.css"
 import { PolarAreaDataModel } from '../../Model/PolarAreaDataModel';
+import html2canvas from 'html2canvas';
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Title);
 
 type propsType = {
@@ -33,6 +34,7 @@ let PolarAreaCustom: FC<propsType> = ({ data }) => {
     setValues(value)
     setBackgroundColors(backgroundColor)
   }), [data])
+
   let converHERtoRGBA = (hex: string) => {
     var c: any;
     if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
@@ -45,44 +47,49 @@ let PolarAreaCustom: FC<propsType> = ({ data }) => {
     }
     throw new Error('Bad Hex');
   }
+  let print = () => {
+    // var container = document.getElementById("image-wrap");
+    /*specific element on page*/
+    var container: HTMLElement | null = document.getElementById("htmltoimage"); /* full page */
+    if (container)
+      html2canvas(container, { allowTaint: true, useCORS: true, logging: true }).then(function (canvas) {
+        //  useCORS: true, logging:true
+        var link = document.createElement("a");
+        document.body.appendChild(link);
+        link.download = "balance_wheel.jpg";
+        link.href = canvas.toDataURL('image/pdf');
+        link.target = '_blank';
+        link.click();
+      });
+  }
+
   const dataPolarArea = {
     labels: labels,
-
     datasets: [
       {
         label: '# of votes',
-        // data: [12, 21, 3, 5, 2, 3],
         data: values,
         backgroundColor: backgroundColors,
-        //  [
-        //   'rgba(255, 99, 132, 0.5)',
-        //   'rgba(54, 162, 235, 0.5)',
-        //   'rgba(255, 206, 86, 0.5)',
-        //   'rgba(75, 192, 192, 0.5)',
-        //   'rgba(153, 102, 255, 0.5)',
-        //   'rgba(255, 159, 64, 0.5)',
-        //   'rgba(255, 15, 64, 0.5)',
-        // ],
         borderWidth: 0,
 
       },
     ],
   };
-  const plugins = {
-    title: {
-      display: true,
-      text: 'Chart.js Polar Area Chart With Centered Point Labels',
-    },
-  }
   const options = {
-    plugins: plugins,
+    plugins: {
+      title: {
+        display: false,
+        // text: 'Chart.js Polar Area Chart With Centered Point Labels',
+        font: {
+          size: 15
+        },
+      },
+    },
     responsive: true,
-
     scales: {
       r: {
         suggestedMin: 1,
         suggestedMax: 10,
-
         angleLines: {
           display: true,
           color: "#000"
@@ -90,7 +97,7 @@ let PolarAreaCustom: FC<propsType> = ({ data }) => {
         ticks: {
           // display: false,
           font: {
-            size: 15
+            size: 20
           },
           backdropPadding: 0,
           // backdropColor:'red'
@@ -104,15 +111,21 @@ let PolarAreaCustom: FC<propsType> = ({ data }) => {
           display: true,
           centerPointLabels: true,
           font: {
-            size: 18
+            size: 20
           },
+          padding: 0,
         },
       },
     },
   }
 
   return (
-    <PolarArea className={style.sheme} data={dataPolarArea} options={options} />
+    <div>
+      <button onClick={() => print()}>Print</button>
+      <div id='htmltoimage'>
+        <PolarArea className={style.sheme} data={dataPolarArea} options={options} />
+      </div>
+    </div>
   )
 }
 export default PolarAreaCustom
