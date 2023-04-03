@@ -3,9 +3,8 @@ import {
   Chart as ChartJS,
   RadialLinearScale,
   ArcElement,
-  Tooltip,
   Title,
-
+  Tooltip
 } from 'chart.js';
 import { PolarArea } from 'react-chartjs-2';
 import style from "./PolarArea.module.css"
@@ -15,10 +14,14 @@ ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Title);
 
 type propsType = {
   data: Array<PolarAreaDataModel>
+  max: number
+  step: number
+  size: number
 }
-let PolarAreaCustom: FC<propsType> = ({ data }) => {
+let PolarAreaCustom: FC<propsType> = ({ data, max, step, size }) => {
   let [labels, setLabels] = useState<Array<string>>([])
   let [values, setValues] = useState<Array<number>>([])
+
   let [backgroundColors, setBackgroundColors] = useState<Array<string>>([])
 
   useEffect((() => {
@@ -43,31 +46,17 @@ let PolarAreaCustom: FC<propsType> = ({ data }) => {
         c = [c[0], c[0], c[1], c[1], c[2], c[2]];
       }
       c = '0x' + c.join('');
-      return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',0.85)';
+      return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',0.80)';
     }
     throw new Error('Bad Hex');
   }
-  let print = () => {
-    // var container = document.getElementById("image-wrap");
-    /*specific element on page*/
-    var container: HTMLElement | null = document.getElementById("htmltoimage"); /* full page */
-    if (container)
-      html2canvas(container, { allowTaint: true, useCORS: true, logging: true }).then(function (canvas) {
-        //  useCORS: true, logging:true
-        var link = document.createElement("a");
-        document.body.appendChild(link);
-        link.download = "balance_wheel.jpg";
-        link.href = canvas.toDataURL('image/pdf');
-        link.target = '_blank';
-        link.click();
-      });
-  }
+
 
   const dataPolarArea = {
     labels: labels,
     datasets: [
       {
-        label: '# of votes',
+        label: '#',
         data: values,
         backgroundColor: backgroundColors,
         borderWidth: 0,
@@ -76,26 +65,18 @@ let PolarAreaCustom: FC<propsType> = ({ data }) => {
     ],
   };
   const options = {
-    plugins: {
-      title: {
-        display: false,
-        // text: 'Chart.js Polar Area Chart With Centered Point Labels',
-        font: {
-          size: 15
-        },
-      },
-    },
     responsive: true,
     scales: {
       r: {
-        suggestedMin: 1,
-        suggestedMax: 10,
+        suggestedMin: 0,
+        suggestedMax: max,
         angleLines: {
           display: true,
           color: "#000"
         },
         ticks: {
           // display: false,
+          stepSize: step,
           font: {
             size: 20
           },
@@ -118,13 +99,13 @@ let PolarAreaCustom: FC<propsType> = ({ data }) => {
       },
     },
   }
-
+  let styleSize = {
+    weight: size + 'px',
+    height: size + 'px'
+  }
   return (
-    <div>
-      <button onClick={() => print()}>Print</button>
-      <div id='htmltoimage'>
-        <PolarArea className={style.sheme} data={dataPolarArea} options={options} />
-      </div>
+    <div style={styleSize} >
+      <PolarArea className={style.sheme} data={dataPolarArea} options={options} />
     </div>
   )
 }

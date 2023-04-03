@@ -19,13 +19,12 @@ const PieChartItem: FC<propsType> = ({ editItem, item,
     let [label, setLabel] = useState<string>(item.label)
     let [value, setValue] = useState<number>(item.value)
     let [backgroundColor, setBackgroundColor] = useState<string>(item.backgroundColor)
-    let backgroundColorInput = backgroundColor.replace(', 0.75)', ')').replace('rgba', 'rgb')
+
     let save = () => {
-        // item.backgroundColor = item.backgroundColor.replace(')', ', 0.75)').replace('rgb', 'rgba')
         let item: PolarAreaDataModel = {
             label: label,
             value: value,
-            backgroundColor: backgroundColor.replace(')', ', 0.75)').replace('rgb', 'rgba'),
+            backgroundColor: backgroundColor,
             id: editItem ? editItem : 0
         }
         saveItem(item)
@@ -45,7 +44,7 @@ const PieChartItem: FC<propsType> = ({ editItem, item,
                 <td><input type="text" value={label} onChange={setItemLabel} /></td>
                 <td><input type="number" value={value} onChange={setItemValue} /></td>
                 <td>
-                    <input type="color" value={backgroundColorInput} onChange={setItemBackgroundColor} /></td>
+                    <input type="color" value={backgroundColor} onChange={setItemBackgroundColor} /></td>
                 <td>
                     <Button name="Save" onClick={save} />
                 </td>
@@ -64,8 +63,6 @@ const PieChartItem: FC<propsType> = ({ editItem, item,
                 </td>
             </>}
         </tr >)
-
-
 }
 
 

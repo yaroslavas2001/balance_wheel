@@ -46,9 +46,7 @@ let PolarAreaTable: FC<propsType> = ({ data, tableName, daleteItem, updateItem, 
   return (
     <div>
       <div>
-        <NewValue addItem={addItem} data={{ text: '', number: 0, backgroundColor: "#000000" }}>
-          <button type="submit" className={style.btn}>Add</button>
-        </NewValue>
+        <NewValue addItem={addItem} data={{ text: '', number: 0, backgroundColor: "#000000" }} />
       </div>
       <table>
         <thead>

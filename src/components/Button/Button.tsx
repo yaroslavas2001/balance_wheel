@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import  { FC } from 'react';
 import style from "./Button.module.css"
 type propsType = {
   onClick: () => void
