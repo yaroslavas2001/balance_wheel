@@ -1,4 +1,4 @@
-button {
+.button {
   font-size: 17px;
   padding: 4px 10px;
   border: transparent;
@@ -9,7 +9,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.button:hover {
   background: rgb(2, 0, 36);
   background: linear-gradient(90deg, rgb(53, 145, 236) 0%, rgb(29, 205, 236) 100%);
   color: white;

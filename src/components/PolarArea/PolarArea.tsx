@@ -9,7 +9,6 @@ import {
 import { PolarArea } from 'react-chartjs-2';
 import style from "./PolarArea.module.css"
 import { PolarAreaDataModel } from '../../Model/PolarAreaDataModel';
-import html2canvas from 'html2canvas';
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Title);
 
 type propsType = {

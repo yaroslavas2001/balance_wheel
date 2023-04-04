@@ -1,8 +1,13 @@
-.App{
+body {
+    /* background-color: rgb(255, 255, 255); */
+}
+
+.App {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.row{
+
+.row {
     display: flex;
 }
