@@ -4,6 +4,7 @@ import { Field } from "formik";
 import { Form } from "formik";
 import style from "./NewValue.module.css"
 import { PolarAreaDataModel } from '../../Model/PolarAreaDataModel';
+import Button from '../Button/Button';
 
 type propsType = {
   data: any
@@ -29,7 +30,7 @@ let NewValue: FC<propsType> = ({ data,  addItem }) => {
         <Field name="text" type="text" placeholder="Enter text" className={style.input} />
         <Field name="number" type="number" className={style.input} />
         <Field name="backgroundColor" type="color" className={style.input} />
-        <button type="submit" className={style.btn}>Add</button>
+        <Button name='Add' type='submit' onClick={()=>{}} />
       </Form>
     </Formik>
   )

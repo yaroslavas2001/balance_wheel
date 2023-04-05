@@ -45,12 +45,13 @@ let PolarAreaTable: FC<propsType> = ({ data, tableName, daleteItem, updateItem, 
 
   return (
     <div>
-      <div>
-        <NewValue addItem={addItem} data={{ text: '', number: 0, backgroundColor: "#000000" }} />
-      </div>
-      <table>
+      <h2>Sections</h2>
+      {/* <div> */}
+      <NewValue addItem={addItem} data={{ text: '', number: 0, backgroundColor: "#000000" }} />
+      {/* </div> */}
+      <table className={style.table}>
         <thead>
-          <tr>
+          <tr className={style.thead}>
             {th}
           </tr>
         </thead>

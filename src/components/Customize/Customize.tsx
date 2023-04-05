@@ -5,6 +5,7 @@ import "./Customize.module.css"
 import "./Customize.css"
 
 import Calendar from 'react-calendar';
+import Button from '../Button/Button';
 type propsType = {
   max: number
   step: number
@@ -26,7 +27,8 @@ let Customize: FC<propsType> = ({ clear, print, max, size, step, clearNames, set
   };
   return (
     <div className={style.block}>
-      <Calendar
+      <h2>Settings</h2>
+      {/* <Calendar
         onChange={(time) => onChange(time)}
         selectRange={true}
         defaultValue={[startDate, endDate]}
@@ -35,15 +37,16 @@ let Customize: FC<propsType> = ({ clear, print, max, size, step, clearNames, set
       />
       {startDate.toDateString()}
       {endDate !== null ? endDate.toDateString() : ''}
-      <br />
+      <br /> */}
+      <Button name='Clear values' onClick={() => clear()} />
+      <Button name='Clear labels' onClick={() => clearNames()} />
+      <div className={style.settings_block}>
+        <b>Max value</b>    <input className={style.input} type="number" value={max} onChange={(e) => { setMax(Number(e.target.value)) }} />
+        <b>Step</b>   <input className={style.input} type="number" value={step} onChange={(e) => { setStep(Number(e.target.value)) }} />
+        <b>Size</b>  <input className={style.input} type="number" min={500} value={size} onChange={(e) => { setSize(Number(e.target.value)) }} />
 
-
-      <button onClick={() => clear()}>Clear values</button>
-      <button onClick={() => clearNames()}>Clear labels</button>
-      max <input type="number" value={max} onChange={(e) => { setMax(Number(e.target.value)) }} />
-      step<input type="number" value={step} onChange={(e) => { setStep(Number(e.target.value)) }} />
-      size<input type="number" min={500} value={size} onChange={(e) => { setSize(Number(e.target.value)) }} />
-      <button onClick={() => print()}>Print</button>
+      </div>
+      <Button name='Print' onClick={() => print()} />
     </div>
   )
 }
