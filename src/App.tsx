@@ -78,7 +78,7 @@ function App() {
       return item
     }))
   }
-  let clearNames=()=>{
+  let clearNames = () => {
     setData(data.map(item => {
       item.label = ''
       return item
@@ -99,7 +99,8 @@ function App() {
   return (
     <div className="App">
       <div id='htmltoimage'>
-        <PolarAreaCustom max={max} size={size} step={step} data={data} />
+        <PolarAreaCustom setSize={setSize} max={max} size={size}
+          step={step} data={data} />
       </div>
       <div className='row'>
         <PolarAreaTable
@@ -109,7 +110,9 @@ function App() {
           daleteItem={daleteItem}
           addItem={addItem}
         />
-        <Customize clearNames={clearNames} setMax={setMax} setStep={setStep} setSize={setSize} clear={clear} print={print} max={max} size={size} step={step} />
+        <Customize clearNames={clearNames} setMax={setMax}
+          setStep={setStep} clear={clear}
+          print={print} max={max} size={size} step={step} />
       </div>
     </div>
   );

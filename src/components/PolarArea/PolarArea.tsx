@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -16,13 +16,28 @@ type propsType = {
   max: number
   step: number
   size: number
+  setSize: (nume: number) => void
 }
-let PolarAreaCustom: FC<propsType> = ({ data, max, step, size }) => {
+let PolarAreaCustom: FC<propsType> = ({ data, max, step, size, setSize }) => {
   let [labels, setLabels] = useState<Array<string>>([])
   let [values, setValues] = useState<Array<number>>([])
 
   let [backgroundColors, setBackgroundColors] = useState<Array<string>>([])
-
+  let ref: any = useRef()
+  let check = () => {
+    if (ref !== undefined) {
+      if (ref.current !== undefined) {
+        setSizeValue(ref.current.width, ref.current.height)
+      }
+    }
+  }
+  let resize = (e: any) => {
+    setSizeValue(e.target.innerWidth, e.target.innerHeight)
+  }
+  let setSizeValue = (width: number, height: number) => {
+    let size = (width <= height) ? width : height
+    setSize(size)
+  }
   useEffect((() => {
     let label: Array<string> = []
     let value: Array<number> = []
@@ -35,6 +50,11 @@ let PolarAreaCustom: FC<propsType> = ({ data, max, step, size }) => {
     setLabels(label)
     setValues(value)
     setBackgroundColors(backgroundColor)
+    window.addEventListener('resize', (e: any) => { resize(e) });
+    check()
+    return () => {
+      window.removeEventListener('resize', (e: any) => { resize(e) });
+    }
   }), [data])
 
   let converHERtoRGBA = (hex: string) => {
@@ -64,7 +84,7 @@ let PolarAreaCustom: FC<propsType> = ({ data, max, step, size }) => {
     ],
   };
   const options = {
-    responsive: true,
+    // responsive: true,
     scales: {
       r: {
         suggestedMin: 0,
@@ -77,7 +97,7 @@ let PolarAreaCustom: FC<propsType> = ({ data, max, step, size }) => {
           // display: false,
           stepSize: step,
           font: {
-            size: 20
+            // size: 20
           },
           backdropPadding: 0,
           // backdropColor:'red'
@@ -91,7 +111,7 @@ let PolarAreaCustom: FC<propsType> = ({ data, max, step, size }) => {
           display: true,
           centerPointLabels: true,
           font: {
-            size: 20
+            // size: 20
           },
           padding: 0,
         },
@@ -104,7 +124,7 @@ let PolarAreaCustom: FC<propsType> = ({ data, max, step, size }) => {
   }
   return (
     <div style={styleSize} >
-      <PolarArea className={style.sheme} data={dataPolarArea} options={options} />
+      <PolarArea ref={ref} className={style.sheme} data={dataPolarArea} options={options} />
     </div>
   )
 }

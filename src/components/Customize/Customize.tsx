@@ -15,9 +15,8 @@ type propsType = {
   print: () => void
   setMax: (max: number) => void
   setStep: (step: number) => void
-  setSize: (size: number) => void
 }
-let Customize: FC<propsType> = ({ clear, print, max, size, step, clearNames, setMax, setStep, setSize }) => {
+let Customize: FC<propsType> = ({ clear, print, max, size, step, clearNames, setMax, setStep }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState<Date>(new Date());
   const onChange = (dates: any) => {
@@ -25,6 +24,9 @@ let Customize: FC<propsType> = ({ clear, print, max, size, step, clearNames, set
     setStartDate(start);
     setEndDate(end);
   };
+  let setStepValue = (step: number) => {
+    if (step > 0) setStep(step)
+  }
   return (
     <div className={style.block}>
       <h2>Settings</h2>
@@ -42,8 +44,8 @@ let Customize: FC<propsType> = ({ clear, print, max, size, step, clearNames, set
       <Button name='Clear labels' onClick={() => clearNames()} />
       <div className={style.settings_block}>
         <b>Max value</b>    <input className={style.input} type="number" value={max} onChange={(e) => { setMax(Number(e.target.value)) }} />
-        <b>Step</b>   <input className={style.input} type="number" value={step} onChange={(e) => { setStep(Number(e.target.value)) }} />
-        <b>Size</b>  <input className={style.input} type="number" min={500} value={size} onChange={(e) => { setSize(Number(e.target.value)) }} />
+        <b>Step</b>   <input className={style.input} type="number" value={step} onChange={(e) => { setStepValue(Number(e.target.value)) }} />
+        {/* <b>Size</b>  <input className={style.input} type="number"  value={size} onChange={(e) => { setSize(Number(e.target.value)) }} /> */}
 
       </div>
       <Button name='Print' onClick={() => print()} />
