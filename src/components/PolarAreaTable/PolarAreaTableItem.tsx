@@ -49,7 +49,7 @@ const PieChartItem: FC<propsType> = ({ editItem, item,
                     <Button name="Save" onClick={save} />
                 </td>
                 <td >
-                    <Button name="Cansel" onClick={canselItem} />
+                    <Button name="Cancel" onClick={canselItem} />
                 </td>
             </> : <>
                 <td>{item.label}</td>

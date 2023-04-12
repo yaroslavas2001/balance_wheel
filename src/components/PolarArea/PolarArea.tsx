@@ -97,7 +97,7 @@ let PolarAreaCustom: FC<propsType> = ({ data, max, step, size, setSize }) => {
           // display: false,
           stepSize: step,
           font: {
-            // size: 20
+            size: 20
           },
           backdropPadding: 0,
           // backdropColor:'red'
@@ -111,7 +111,7 @@ let PolarAreaCustom: FC<propsType> = ({ data, max, step, size, setSize }) => {
           display: true,
           centerPointLabels: true,
           font: {
-            // size: 20
+            size: 20
           },
           padding: 0,
         },
