@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/balance_wheel/static/css/main.ce72c58e.css",
-    "main.js": "/balance_wheel/static/js/main.ccd9dd16.js",
+    "main.js": "/balance_wheel/static/js/main.02b7a426.js",
     "static/js/787.647b7d5e.chunk.js": "/balance_wheel/static/js/787.647b7d5e.chunk.js",
     "index.html": "/balance_wheel/index.html",
     "main.ce72c58e.css.map": "/balance_wheel/static/css/main.ce72c58e.css.map",
-    "main.ccd9dd16.js.map": "/balance_wheel/static/js/main.ccd9dd16.js.map",
+    "main.02b7a426.js.map": "/balance_wheel/static/js/main.02b7a426.js.map",
     "787.647b7d5e.chunk.js.map": "/balance_wheel/static/js/787.647b7d5e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ce72c58e.css",
-    "static/js/main.ccd9dd16.js"
+    "static/js/main.02b7a426.js"
   ]
 }
